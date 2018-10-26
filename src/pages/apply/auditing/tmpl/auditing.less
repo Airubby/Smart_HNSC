@@ -1,0 +1,144 @@
+@lightBlue: #638fc5;
+@mainblue: #6ca4e7;
+
+.mb10 {
+  margin-bottom: 10px;
+}
+.dashboard-container {
+  line-height: 20px;
+}
+.title {
+  line-height: 40px;
+}
+// 万元
+.fontStyle {
+  text-align: right;
+  line-height: 26px;
+  color: @grayColor;
+}
+
+.top-box {
+  background: #ffffff;
+  padding: 30px 0;
+  .top-left {
+    position: relative;
+    min-width: 225px;
+    width: 20%;
+    font-size: 48px;
+    line-height: 100px;
+    text-align: center;
+    height: 100px;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    color: @mainblue;
+    .selectInput {
+      width: 40px;
+      position: absolute;
+      right: 20px;
+      top: 0;
+    }
+  }
+  .top-right {
+    // background: palevioletred;
+    margin-left: 200px;
+    padding-top: 10px;
+    text-align: center;
+    .process-item {
+      display: inline-block;
+      .svg-icon {
+        width: 86px;
+        height: 64px;
+      }
+    }
+  }
+}
+.middle-box {
+  width: 100%;
+  .el-col {
+    float: left;
+  }
+  .history-item {
+    padding-left: 40px;
+    font-size: 14px;
+  }
+  .historyName {
+    color: @lightBlue;
+    margin-right: 10px;
+  }
+  .dot {
+    margin: 0 10px;
+    display: inline-block;
+    line-height: 14px;
+    width: 3px;
+    height: 3px;
+    .border-radius(50%);
+    background-color: @lightBlue;
+  }
+  .imgBox {
+    width: 124px;
+    height: 70px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.bottom-box {
+  background: #ffffff;
+  padding: 0 20px 40px;
+  .el-button-group .el-button {
+    margin-right: 50px;
+    .iconfont {
+      margin-right: 5px;
+    }
+  }
+  .btnGroup {
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
+  }
+}
+
+// 弹窗
+.diagContent {
+  padding: 50px;
+  line-height: 50px;
+  p {
+    font-size: 18px;
+    color: #333333;
+    span:nth-child(1) {
+      display: inline-block;
+      width: 60%;
+    }
+    span:nth-child(2) {
+      width: 30%;
+      display: inline-block;
+      text-align: right;
+      font-size: 12px;
+    }
+    em {
+      font-style: normal;
+      color: #599ef0;
+      font-size: 32px;
+    }
+  }
+}
+// 签批表
+.signlist-item {
+  .pdfTit {
+    margin-bottom: 10px;
+  }
+  .imgPdf {
+    width: 60px;
+    height: 70px;
+    margin-right: 10px;
+    cursor: pointer;
+    .svg-icon {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .pdfname {
+    cursor: pointer;
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>资金综合监管系统</title>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="./static/swiper-4.2.2.min.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_836536_vrboa6h1fl.css">
+  <script src="//at.alicdn.com/t/font_836536_vrboa6h1fl.js"></script>
+  <style type="text/css">
+    @font-face {
+      font-family: 'iconfont';
+      /* project id 836536 */
+      src: url('//at.alicdn.com/t/font_836536_vrboa6h1fl.eot');
+      src: url('//at.alicdn.com/t/font_836536_vrboa6h1fl.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_836536_vrboa6h1fl.woff') format('woff'),
+        url('//at.alicdn.com/t/font_836536_vrboa6h1fl.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_836536_vrboa6h1fl.svg#iconfont') format('svg');
+    }
+
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+  <script src="http://cdn.bootcss.com/echarts/3.2.2/echarts.min.js"></script>
+
+  <script>
+    (function () {
+      var changeRem = function () {
+        var width = document.documentElement.clientWidth;
+        document.documentElement.style.fontSize = (width < 1920 ? 1920 : width) / 16 + 'px';
+      };
+      changeRem();
+      var t;
+      window.addEventListener('resize', function () {
+        clearTimeout(t);
+        t = setTimeout(changeRem, 300);
+      }, false);
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) {
+          alert("缓存来的")
+          clearTimeout(t);
+          t = setTimeout(changeRem, 300);
+        }
+      }, false);
+    }());
+
+  </script>
+
+  <!-- <script src="https://unpkg.com/element-ui@2.2.1/lib/index.js"></script> -->
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+@charset "utf-8";
+
+//main-container全局样式
+.container {
+  position: absolute;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 1920px;
+  min-height: 1080px;
+}
+.bgShadow {
+  background: rgba(0, 215, 241, .1);
+  -webkit-box-shadow: outset 0px 0px 38px #257a8f;
+  box-shadow: 0px 0px 38px #257a8f inset;
+}
+.closebtn {
+  position: absolute;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+  display: block;
+  line-height: 30px;
+  text-align: center;
+  top: 20px;
+}
+.dialog-main {
+  padding: 15px 20px 20px 20px;
+  width: 100%;
+  height: calc(100vh - 61px);
+  // min-height: 1020px;
+}
+// .main-left {
+//   min-height: 500px;
+// }
+// .main-right {
+//   min-height: 495px;
+// }
+// .chartBox {
+//   min-height: 430px;
+// }
+/**
+  * 公共样式 public
+  *
+ */
+
+ /* input错误提示 */
+.inputItem {
+  position: relative;
+}
+.help {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  color: #f50049;
+}
+
+/* input 样式 */
+input:not[type="checkbox"] {
+  width: 100%;
+  padding: .625rem .9375rem;
+  height: 2.0625rem;
+  margin-bottom: 1.5625rem;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border:1px solid @borderColor;
+  background-color: transparent!important;
+}
+input[type="checkbox"] {
+  width: .75rem;
+  height: .75rem;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+// element-ui resize style
+// pagination
+.pagination-container {
+  margin: 8px 0;
+  line-height: 30px;
+  text-align: right;
+  .el-pagination {
+    display: inline-block
+  }
+  .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: normal;
+    &:hover {
+      color: #00ffff;
+    }
+  }
+  .el-pagination.is-background .el-pager li:not(.disabled) {
+    &:hover {
+      color: #00ffff;
+    }
+    &.active {
+      color: #00ffff;
+      background-color: transparent;
+    }
+  }
+  .el-pagination__total {
+    color: #ffffff;
+  }
+}
+
+// sideBar
+.el-menu {
+  border-right: none;
+}
+.el-submenu >.el-submenu__title {
+  text-align: left;
+  border-left: 5px solid transparent;
+}
+// .el-submenu.is-opened .el-submenu__title
+.el-submenu.is-active .el-submenu__title{
+  color: #6CA4E7;
+  border-left-color: #6CA4E7;
+  i.iconfont {
+    font-size: 20px;
+    color:#6CA4E7;
+  }
+}
+
+// navbar
+.el-menu--horizontal {
+  border-bottom: none!important;
+  min-width: 1300px;
+}
+.el-menu--horizontal>.el-menu-item {
+  padding: 0 30px;
+  height: 42px!important;
+  line-height: 42px!important;
+  border-right: 1px solid rgba(0,0,0,.3);
+  border-bottom: none!important;
+  &:last-child {
+    border-right: none;
+  }
+}
+.el-menu--horizontal>.el-menu-item.is-active {
+  // border-bottom: none!important;
+  color: #409EFF!important;
+}
+
+// table style
+@borderColor: #CFD9E4!important;
+.el-table {
+  // border-collapse: collapse;
+  // border: 1px solid @borderColor;
+  thead {
+    color: #6081A8!important;
+  }
+  th {
+    background:#EBF0F6!important;
+  }
+  td {
+    border-color: @borderColor;
+  }
+}
+.el-table--border {
+  border-color: @borderColor;
+  td, th {
+    border-color: @borderColor;
+  }
+}
+.el-table__fixed-right::before, .el-table__fixed::before{
+  background-color: @borderColor;
+}
+.el-table--border::after, .el-table--group::after, .el-table::before{
+  background-color: @borderColor;
+}
+// 年份选择
+.selectInput .el-input__inner {
+  border: none;
+  padding: 0 20px!important;
+}
+.selectInput .el-input .el-select__caret {
+  color: #6CA4E7!important;
+}
+.top-left .el-select-dropdown {
+  top: 270px!important;
+  left: 346px!important;
+}
