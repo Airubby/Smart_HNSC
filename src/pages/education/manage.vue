@@ -84,16 +84,10 @@ export default {
     
   },
   mounted(){
-    this.getStatusData();
+    
   },
   methods: {
-    getStatusData(){
-      API.getCostApplyYearStatus({
-        year: this.value
-      }).then(res=> {
-        console.log(res)
-      })
-    },
+    
   }
 };
 </script>
