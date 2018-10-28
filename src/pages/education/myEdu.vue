@@ -23,7 +23,7 @@
         </el-row>
       </div>
       <div class="manageBody">
-        <div class="manageBodyTitle">题库管理</div>
+        <div class="manageBodyTitle">我的答题</div>
         <div class="manageBodyCon">
           <ul class="myEduUl">
             <li>1.招标文件澄清或者修改的内容可能影响投标文件编制的，采购人或者采购代理机构应当在投标截止时间至少( )前，以书面形式通知所有获取招标文件的潜在投标人。<span>99次</span></li>

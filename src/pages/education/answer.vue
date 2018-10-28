@@ -31,7 +31,7 @@
             <slot name="footer">
                 <div class="dialog-footer">
                     <el-button type="primary" @click="next">{{nextBtn}}</el-button>
-                    <el-button type="primary" @click="back">上一题</el-button>
+                    <el-button type="primary" @click="back">{{backBtn}}</el-button>
                 </div>
             </slot>
         </div>
@@ -55,42 +55,108 @@ export default {
         return {
             centerDialogVisible:false,
             nextBtn:"下一题",
+            backBtn:"上一题",
             dataList:[],
             currentTitle:0,
             answerList:[],
             currentAnswer:[],
             finish:0,
             all:0,
-            checkprogress:0
+            checkprogress:0,
+            sureClose:false,
         }
     },
     methods:{
         getLoginTitle(){
             API.getLoginTitle({}).then(res=> {
                 console.log(res)
-                if(res.data) {
+                if(res.code==200) {
                     this.dataList=res.data;
                     this.all=this.dataList.length;
+                    if(this.all==1){
+                        this.nextBtn="提交";
+                        this.backBtn="";
+                    }
+                }
+            })
+        },
+        postLoginTitleAnswer(){
+            API.postLoginTitleAnswer({
+                result:JSON.stringify(this.answerList)
+            }).then(res=> {
+                console.log(res)
+                if(res.code==200) {
+                    this.$message.sucess(res.msg);
+                }else{
+                    this.$message.warning(res.msg);
                 }
             })
         },
         next(){
+            //返回上一题...然后下一题的判断
+            for(let i=0;i<this.answerList.length;i++){
+                if(this.dataList[this.currentTitle+1]&&this.answerList[i].id==this.dataList[this.currentTitle+1].id){
+                    this.currentAnswer=this.answerList[i].answerDetail;
+                }
+            }
             if(this.currentAnswer.length==0){
-                this.$message.warning('请做完此题再进行下一题');
+                if(this.finish+1==this.all){
+                    this.$message.warning('请做完此题再提交');
+                }else{
+                    this.$message.warning('请做完此题再进行下一题');
+                }
             }else{
-                this.checkprogress+=1;
-                this.currentTitle+=1;
-                this.currentAnswer=[];
+                if(this.finish==this.all){
+                    this.postLoginTitleAnswer();
+                    this.sureClose=true;
+                    return;
+                }
+                let has=false;
+                for(let i=0;i<this.answerList.length;i++){
+                    if(this.answerList[i].id==this.dataList[this.currentTitle].id){
+                        this.currentAnswer=this.answerList[i].answerDetail;
+                        has=true;
+                    }
+                }
+                if(JSON.stringify(this.currentAnswer)==JSON.stringify(this.dataList[this.currentTitle].answer)){
+                    if(!has){
+                        this.answerList.push({id:this.dataList[this.currentTitle].id,answer:'true',answerDetail:this.currentAnswer});
+                    }
+                    this.checkprogress+=1;
+                    this.currentTitle+=1;
+                    this.currentAnswer=[];
+                }else{
+                    if(!has){
+                        this.answerList.push({id:this.dataList[this.currentTitle].id,answer:'false',answerDetail:this.currentAnswer})
+                    }else{
+                        this.checkprogress+=1;
+                        this.currentTitle+=1;
+                        this.currentAnswer=[];
+                    }
+                }
+            }
+            console.log(this.currentTitle)
+            if(this.currentTitle+1==this.all){
+                this.nextBtn="提交";
             }
         },
         back(){
-            this.currentTitle-=1;
+            if(this.currentTitle!=0){
+                this.currentTitle-=1;
+                this.checkprogress-=1;
+                for(let i=0;i<this.answerList.length;i++){
+                    if(this.answerList[i].id==this.dataList[this.currentTitle].id){
+                        this.currentAnswer=this.answerList[i].answerDetail;
+                    }
+                }
+            }
+            this.nextBtn="下一题";
         },
         close(){
-            if(this.finish!=this.all){
-                this.$message.warning('你还没答完题哦！');
-            }else{  
+            if(this.sureClose){
                 this.centerDialogVisible=false;
+            }else{  
+                this.$message.warning('你还没答完题哦！');
             }
         },
     },
@@ -109,7 +175,7 @@ export default {
                     this.finish-=1;
                 }
             }
-        }
+        },
     },
     
 }
@@ -140,6 +206,12 @@ export default {
                     line-height:30px;
                     .list{
                         margin:10px 0;
+                    }
+                    .answer{
+                        em{
+                            font-style:normal;
+                            margin-right:10px;
+                        }
                     }
                 }
             }

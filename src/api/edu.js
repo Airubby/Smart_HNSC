@@ -24,3 +24,14 @@ export function getLoginTitle(arg) {
     params: arg
   });
 }
+
+/**
+ * [postLoginTitleAnswer 提交登录弹窗答题]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function postLoginTitleAnswer(arg) {
+  return request.get(`/education/postLoginTitleAnswer`, {
+    params: arg
+  });
+}
