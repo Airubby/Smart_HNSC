@@ -1,0 +1,98 @@
+.dialog-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  margin: 0;
+  z-index: 2000;
+  background-color: rgba(0,0,0,.5);
+  .dialog-center {
+    position: relative;
+    margin: 15vh auto 50px;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    box-sizing: border-box;
+    width: 40%;
+    min-width: 460px;
+  }
+  .dialog-title {
+    padding: 20px;
+    padding-bottom: 10px;
+    span {
+      line-height: 24px;
+      font-size: 18px;
+      color: #333;
+    }
+  }
+  .dialog-content {
+    padding: 30px 44px;
+    color: #606266;
+    font-size: 14px;
+    .title{
+        height: 26px;
+        line-height:26px;
+        font-size:16px;
+        .line{
+            width: 4px;
+            height:100%;
+            background:#599EF0;
+            border-radius:2px;
+            margin-right:18px;
+            display:block;
+            float:left;
+        }
+        span{
+            color:#F38C40;
+            font-size: 12px;
+            margin-left:5px;
+        }
+    }
+    .conbox{
+        padding:0 44px;
+    }
+    .el-form-item__label{
+      color:#6081A8;
+    }
+  }
+  .dialog-footer {
+    box-sizing: border-box;
+    padding:0;
+    overflow:hidden;
+    margin-top:100px;
+    .el-button{
+        width:50%;
+        height:54px;
+        margin:0;
+        display:block;
+        float:left;
+    }
+    .el-button:nth-of-type(1){
+        border-radius:0px 0px 0px 7px;
+    }
+    .el-button:nth-of-type(2){
+        border-radius:0px 0px 7px 0px;
+        background:rgba(250,250,250,1);
+        border-color:rgba(250,250,250,1);
+        color:#666;
+    }
+  }
+}
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 28px;
+  color:@grayColor;
+}
+.closeBtn:hover{
+    color: @blueColor;
+}
+

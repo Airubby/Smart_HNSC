@@ -4,13 +4,23 @@ import Qs from 'querystring'
 // 教育培训模块
 
 /**
- * 该接口仅供参考使用
- * [getCostApplyYearStatus 预算申报-年初申报预算-顶部流程状态]
+ * [getEducationStatus 登录弹窗答题状态获取]
  * @param  {[type]} arg [description]
  * @return {[type]}     [description]
  */
-export function getCostApplyYearStatus(arg) {
-  return request.get(`/apply/costApply/yearStatus`, {
+export function getEducationStatus(arg) {
+  return request.get(`/education/getStatus`, {
+    params: arg
+  });
+}
+
+/**
+ * [getLoginTitle 登录弹窗答题列表获取]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function getLoginTitle(arg) {
+  return request.get(`/education/getLoginTitle`, {
     params: arg
   });
 }

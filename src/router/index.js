@@ -234,22 +234,7 @@ export const eduManageRouters = [
     component: Layout,
     name: '题库管理',
     meta: { icon: 'caidanxiaobiao1' },
-    redirect: '/edu/answer'
-  },
-  {
-    path: '/edu',
-    component: Layout,
-    name: '登录答题',
-    meta: { icon: 'caidanxiaobiao1' },
-    redirect: '/edu/answer',
-    children: [
-      {
-        path: 'answer',
-        name: 'answer',
-        component: _import('dashboard/index'),
-        meta: { title: '登录答题' }
-      }
-    ]
+    redirect: '/edu/manage'
   },
   {
     path: '/edu',
@@ -260,7 +245,7 @@ export const eduManageRouters = [
       {
         path: 'manage',
         name: 'manage',
-        component: _import('dashboard/index'),
+        component: _import('education/manage'),
         meta: { title: '题库管理' }
       }
     ]
@@ -274,7 +259,7 @@ export const eduManageRouters = [
       {
         path: 'learning',
         name: 'learning',
-        component: _import('dashboard/index'),
+        component: _import('education/learning'),
         meta: { title: '题库学习' }
       }
     ]
@@ -288,7 +273,7 @@ export const eduManageRouters = [
       {
         path: 'myEdu',
         name: 'myEdu',
-        component: _import('dashboard/index'),
+        component: _import('education/myEdu'),
         meta: { title: '我的答题' }
       }
     ]

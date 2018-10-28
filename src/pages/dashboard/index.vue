@@ -174,6 +174,8 @@
     <v-upload :isDialog.sync="outerVisible2"></v-upload>
     <!-- 编辑 -->
     <v-upload :isDialog.sync="outerVisible4" :data="fileList"></v-upload>
+    <!-- 登录答题 -->
+    <v-answer :isDialog.sync="answer" v-if="answer"></v-answer>
   </div>
 </template>
 <script>
@@ -184,7 +186,9 @@ import VDialog from "@/pages/common/dialog";
 import VPreview from "@/pages/common/pdf/pdfPreview";
 import MultiPreview from "@/pages/common/pdf/multipdfPreview";
 import VUpload from "@/pages/common/upload/upload";
+import VAnswer from "@/pages/education/answer";
 import * as API from '@/api/apply/apply';
+import * as eduAPI from '@/api/edu';
 
 export default {
   name: "dashboard",
@@ -195,10 +199,12 @@ export default {
     VPreview,
     MultiPreview,
     VUpload,
-    SelectTable
+    SelectTable,
+    VAnswer
   },
   data() {
     return {
+      answer:false,
       name: "Test",
       auth: "1",
       roles: [
@@ -436,10 +442,18 @@ export default {
   mounted(){
     this.getStatusData();
     this.getHistoryList();
+    this.getEducationStatus();
     this.cardContent = this.tmplData[1].descr
     this.tableTitle = this.tmplData[1].title
   },
   methods: {
+    getEducationStatus(){
+      eduAPI.getEducationStatus({}).then(res=> {
+        if(res.data) {
+          this.answer=true;
+        }
+      })
+    },
     getStatusData(){
       this.topData = []
       API.getCostApplyYearStatus({

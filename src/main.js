@@ -16,10 +16,14 @@ import 'swiper/dist/css/swiper.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+//table
+import ElSearchTablePagination from 'el-table-pagination'
+
 // mount with global
 Vue.use(ElementUI)
 Vue.use(VueAwesomeSwiper)
 Vue.use(Echarts)
+Vue.use(ElSearchTablePagination)
 
 // import '@/permission' // permission control
 import tool from '@/utils/tool'

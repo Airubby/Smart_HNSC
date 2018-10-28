@@ -128,7 +128,7 @@ export default {
   }
   &-main {
     margin-top: 2px;
-    min-height: calc(100vh - 138px);
+    min-height: calc(100vh - 140px);
     position: relative;
     .layout-left {
       position: absolute;
