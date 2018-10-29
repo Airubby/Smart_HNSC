@@ -4,19 +4,19 @@
         <el-row :gutter="17" class="manageTopElrow">
           <el-col :span="8" class="manageTopElcol">
             <div class="manageTopBox eduReferenceBg">
-              <p class="number">10</p>
+              <p class="number">{{numberData.count}}</p>
               <p>已答题次数</p>
             </div>
           </el-col>
           <el-col :span="8" class="manageTopElcol">
             <div class="manageTopBox eduAnswerBg">
-              <p class="number">200</p>
+              <p class="number">{{numberData.amount}}</p>
               <p>已答题数量</p>
             </div>
           </el-col>
           <el-col :span="8" class="manageTopElcol">
             <div class="manageTopBox eduTemplateBg">
-              <p class="number numberColor">80%</p>
+              <p class="number numberColor">{{numberData.accuracy}}</p>
               <p>正确率</p>
             </div>
           </el-col>
@@ -56,6 +56,12 @@ export default {
   },
   data() {
     return {
+      numberData:{
+        "count": 0,
+        "amount": 0,
+        "accuracy": "100%"
+      },
+      listData:[],
       currentPage:1,
       table_data:[
         {content:'xia'}
@@ -75,10 +81,30 @@ export default {
     
   },
   mounted(){
-    
+    this.getLoginTitle();
+    this.getMyEduTitle();
   },
   methods: {
-    
+    getLoginTitle(){
+      API.getMyEduNumber({}).then(res=> {
+        console.log(res)
+        if(res.code==200) {
+          this.numberData=res.data;
+        }else{
+          this.$message.warning(res.msg);
+        }
+      })
+    },
+    getMyEduTitle(){
+      API.getMyEduTitle({}).then(res=> {
+        console.log(res)
+        if(res.code==200) {
+          this.listData=res.data;
+        }else{
+          this.$message.warning(res.msg);
+        }
+      })
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
     },

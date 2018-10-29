@@ -77,6 +77,8 @@ export default {
                         this.nextBtn="提交";
                         this.backBtn="";
                     }
+                }else{
+                    this.$message.warning(res.msg);
                 }
             })
         },
@@ -153,6 +155,7 @@ export default {
             this.nextBtn="下一题";
         },
         close(){
+            this.centerDialogVisible=false;
             if(this.sureClose){
                 this.centerDialogVisible=false;
             }else{  
