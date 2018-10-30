@@ -2,32 +2,6 @@ import request from '@/utils/request'
 import Qs from 'querystring'
 
 // 教育培训模块
-// {
-//   "Result": {
-//     "Token": "f9170edc",
-//     "AppID": "11111111-1111-1111-1111-111111111111",
-//     "ViewID": "11111111-1111-1111-1111-111111111111",
-//     "Account": "18908061520",
-//     "Name": "太极测试账号",
-//     "ID": "2630",
-//     "Orgs": [
-//       {
-//         "User_ID": "2630",
-//         "Org_ID": "519",
-//         "View_ID": "11111111-1111-1111-1111-111111111111",
-//         "Parent_ID": "10",
-//         "User_Name": "太极测试账号",
-//         "Org_Name": "第三方接入"
-//       }
-//     ],
-//     "Funcs": [],
-//     "IpAddress": "171.221.203.85",
-//     "CreateTime": "2018-10-29T12:28:02.6125433+08:00"
-//   },
-//   "PagingInfo": null,
-//   "Message": "操作成功",
-//   "Code": 200
-// }
 
 /** 
  * [getEducationStatus 登录弹窗答题状态获取]
@@ -51,35 +25,115 @@ export function getLoginTitle(arg) {
   });
 }
 
-/**
- * [postLoginTitleAnswer 提交登录弹窗答题]
- * @param  {[type]} arg [description]
- * @return {[type]}     [description]
- */
-export function postLoginTitleAnswer(arg) {
-  return request.get(`/education/postLoginTitleAnswer`, {
-    params: arg
-  });
-}
+
 
 /**
- * [getMyEduNumber 获取我的答题数量正确率及答题次数]
- * @param  {[type]} arg [description]
- * @return {[type]}     [description]
- */
-export function getMyEduNumber(arg) {
-  return request.get(`/education/myEdu/getNumber`, {
-    params: arg
-  });
-}
-
-/**
- * [getMyEduTitle 获取我的答题列表信息]
+ * [getMyEduTitle 获取我的答题列表信息，错题列表]
  * @param  {[type]} arg [description]
  * @return {[type]}     [description]
  */
 export function getMyEduTitle(arg) {
-  return request.get(`/education/myEdu/getTitle`, {
+  return request.get(`/api/Education/SearchWrongExamByUserID`, {
+    params: arg
+  });
+}
+
+
+/**
+ * [randomSubject 获取登录弹窗答题,抽取答题列表]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function randomSubject(arg) {
+  return request.get(`/api/Education/RandomSearchEducationSubject`, {
+    params: arg
+  });
+}
+
+/**
+ * [submitExam 提交登录弹窗答题]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function submitExam(arg) {
+  return request.get(`/api/Education/SubmitExam`, {
+    params: arg
+  });
+}
+
+/**
+ * [getExamNumber 获取我的答题次数]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function getExamNumber(arg) {
+  return request.get(`/api/Education/GetExamNumberByUserID`, {
+    params: arg
+  });
+}
+
+/**
+ * [getExamCount 获取我的答题数量]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function getExamCount(arg) {
+  return request.get(`/api/Education/GetExamCountByUserID`, {
+    params: arg
+  });
+}
+
+/**
+ * [getExamRightRate 获取我的答题准去率]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function getExamRightRate(arg) {
+  return request.get(`/api/Education/GetExamRightRateByUserID`, {
+    params: arg
+  });
+}
+
+/**
+ * [getEducationAnswerParameter 获取随机答题参数]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function getEducationAnswerParameter(arg) {
+  return request.get(`/api/Education/GetEducationAnswerParameter`, {
+    params: arg
+  });
+}
+
+/**
+ * [saveEducationAnswerParameter 保存随机答题参数]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function saveEducationAnswerParameter(arg) {
+  return request.get(`/api/Education/SaveEducationAnswerParameter`, {
+    params: arg
+  });
+}
+
+/**
+ * [updateEducationSubject 新增编辑题库]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function updateEducationSubject(arg) {
+  return request.get(`/api/Education/UpdateEducationSubject`, {
+    params: arg
+  });
+}
+
+/**
+ * [getEducationSubject 获取题库详情]
+ * @param  {[type]} arg [description]
+ * @return {[type]}     [description]
+ */
+export function getEducationSubject(arg) {
+  return request.get(`/api/Education/GetEducationSubjectByID`, {
     params: arg
   });
 }

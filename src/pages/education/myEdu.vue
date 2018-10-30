@@ -81,12 +81,35 @@ export default {
     
   },
   mounted(){
-    this.getLoginTitle();
+    this.getExamNumber();
     this.getMyEduTitle();
   },
   methods: {
-    getLoginTitle(){
-      API.getMyEduNumber({}).then(res=> {
+    //答题次数
+    getExamNumber(){
+      API.getExamNumber({}).then(res=> {
+        console.log(res)
+        if(res.code==200) {
+          this.numberData=res.data;
+        }else{
+          this.$message.warning(res.msg);
+        }
+      })
+    },
+    //答题数量
+    getExamCount(){
+      API.getExamCount({}).then(res=> {
+        console.log(res)
+        if(res.code==200) {
+          this.numberData=res.data;
+        }else{
+          this.$message.warning(res.msg);
+        }
+      })
+    },
+    //答题正确率
+    getExamRightRate(){
+      API.getExamRightRate({}).then(res=> {
         console.log(res)
         if(res.code==200) {
           this.numberData=res.data;

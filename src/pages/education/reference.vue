@@ -22,8 +22,8 @@
                                     </el-option>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item label="题目类别" prop="category">
-                                <el-select v-model="ruleForm.category" placeholder="请选择题目类别" size="small" style="width:100%">
+                            <el-form-item label="题目类别" prop="classify">
+                                <el-select v-model="ruleForm.classify" placeholder="请选择题目类别" size="small" style="width:100%">
                                     <el-option
                                     v-for="item in type_data"
                                     :key="item.id"
@@ -32,8 +32,8 @@
                                     </el-option>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item label="正确答案" prop="result">
-                                <el-checkbox-group v-model="ruleForm.result">
+                            <el-form-item label="正确答案" prop="corrects">
+                                <el-checkbox-group v-model="ruleForm.corrects">
                                     <p><el-checkbox label="A" value="A" key="A">答案A</el-checkbox></p>
                                     <p><el-checkbox label="B" value="B" key="B">答案B</el-checkbox></p>
                                     <p v-if="ruleForm.type!='3'"><el-checkbox label="C" value="C" key="C">答案C</el-checkbox></p>
@@ -41,30 +41,30 @@
                                      
                                 </el-checkbox-group>
                             </el-form-item>
-                            <el-form-item label="题目解析" prop="analysis">
-                                <el-input v-model="ruleForm.analysis" placeholder="请输入主管处室" size="small"></el-input>
+                            <el-form-item label="题目解析" prop="analyze">
+                                <el-input v-model="ruleForm.analyze" placeholder="请输入主管处室" size="small"></el-input>
                             </el-form-item>
-                            <el-form-item label="政策法规" prop="statute">
-                                <el-input v-model="ruleForm.statute" placeholder="请输入政策法规" size="small"></el-input>
+                            <el-form-item label="政策法规" prop="legislation_id">
+                                <el-input v-model="ruleForm.legislation_id" placeholder="请输入政策法规" size="small"></el-input>
                             </el-form-item>
                         </div>
                         <div class="title"><i class="line"></i>题目详情</div>
                         <div class="conbox">
-                            <el-form-item label="题目内容" prop="content">
-                                <el-input v-model="ruleForm.content" type="textarea" placeholder="请输入题目内容" class="area" style="height:100px;"></el-input>
+                            <el-form-item label="题目内容" prop="title">
+                                <el-input v-model="ruleForm.title" type="textarea" placeholder="请输入题目内容" class="area" style="height:100px;"></el-input>
                             </el-form-item>
-                            <el-form-item label="A" prop="A">
-                                <el-input v-model="ruleForm.A" placeholder="请输入文字" size="small"></el-input>
+                            <el-form-item label="A" prop="a">
+                                <el-input v-model="ruleForm.a" placeholder="请输入文字" size="small"></el-input>
                             </el-form-item>
-                            <el-form-item label="B" prop="B">
-                                <el-input v-model="ruleForm.B" placeholder="请输入文字" size="small"></el-input>
+                            <el-form-item label="B" prop="b">
+                                <el-input v-model="ruleForm.b" placeholder="请输入文字" size="small"></el-input>
                             </el-form-item>
                             <div v-if="ruleForm.type!='3'">
-                            <el-form-item label="C" prop="C">
-                                <el-input v-model="ruleForm.C" placeholder="请输入文字" size="small"></el-input>
+                            <el-form-item label="C" prop="c">
+                                <el-input v-model="ruleForm.c" placeholder="请输入文字" size="small"></el-input>
                             </el-form-item>
-                            <el-form-item label="D" prop="D">
-                                <el-input v-model="ruleForm.D" placeholder="请输入文字" size="small"></el-input>
+                            <el-form-item label="D" prop="d">
+                                <el-input v-model="ruleForm.d" placeholder="请输入文字" size="small"></el-input>
                             </el-form-item>
                             </div>
                         </div>
@@ -73,14 +73,15 @@
             </slot>
             <slot name="footer">
                 <div class="dialog-footer">
-                    <el-button type="primary">继续添加</el-button>
-                    <el-button type="primary">保存</el-button>
+                    <el-button type="primary" @click="moreSave">继续添加</el-button>
+                    <el-button type="primary" @click="save">保存</el-button>
                 </div>
             </slot>
         </div>
     </div>
 </template>
 <script>
+import * as API from '@/api/edu';
 export default {
     name: 'VReference',
     props:["isDialog","data"],
@@ -89,6 +90,8 @@ export default {
     },
     created () {
        this.centerDialogVisible=this.isDialog;
+       this.ruleForm.subject_id=this.data;
+       console.log(this.data)
     },
     mounted() {
         
@@ -100,37 +103,38 @@ export default {
             // <p v-for="inItem in result_data"><el-checkbox :label="inItem.id" :value="inItem.id" :key="inItem.id">{{inItem.item}}</el-checkbox></p>   
             // result_data:[{id:'A',item:'答案A'},{id:'B',item:'答案B'},{id:'C',item:'答案C'},{id:'D',item:'答案D'}],
             ruleForm: {
+                subject_id:'',
                 type: '',
-                category:'',
-                result:[],
-                analysis:'',
-                statute:'',
-                content:'',
-                A:'',
-                B:'',
-                C:'',
-                D:'',
+                classify:'',
+                corrects:[],
+                analyze:'',
+                legislation_id:'',
+                title:'',
+                a:'',
+                b:'',
+                c:'',
+                d:'',
             },
             rules:{
                 type: [
                     { required: true, message: '请选择题目类型', trigger: 'change' },
                 ],
-                result: [
+                corrects: [
                     { required: true, message: '请选择题目答案', trigger: 'change' },
                 ],
-                content: [
+                title: [
                     { required: true, message: '请输入题目内容', trigger: 'blur' },
                 ],
-                A: [
+                a: [
                     { required: true, message: '请输入A答案内容', trigger: 'blur' },
                 ],
-                B: [
+                b: [
                     { required: true, message: '请输入B答案内容', trigger: 'blur' },
                 ],
-                C: [
+                c: [
                     { required: true, message: '请输入C答案内容', trigger: 'blur' },
                 ],
-                D: [
+                d: [
                     { required: true, message: '请输入D答案内容', trigger: 'blur' },
                 ],
 
@@ -138,17 +142,48 @@ export default {
         }
     },
     methods:{
-       
+       //新增编辑题库
+        getExamCount(){
+            API.getExamCount(this.ruleForm).then(res=> {
+                console.log(res)
+                if(res.code==200) {
+                    this.$message.success(res.msg);
+                }else{
+                    this.$message.warning(res.msg);
+                }
+            })
+        },
+        //获取题库详情
+        getEducationSubject(){
+            API.getEducationSubject({subject_id:this.subject_id}).then(res=> {
+                console.log(res)
+                if(res.code==200) {
+                    this.ruleForm=res.data;
+                }else{
+                    this.$message.warning(res.msg);
+                }
+            })
+        },
+        moreSave(){
+
+        },
+        save(){
+
+        },
     },
     watch:{
         centerDialogVisible(value){
             this.$emit('update:isDialog', value)
+            console.log(value)
         },
-        'ruleForm.result':function(val){
+        'ruleForm.corrects':function(val){
             if(this.ruleForm.type!='2'&&val.length>1){
-                this.ruleForm.result=[];
-                this.ruleForm.result.push(val[val.length-1]);
+                this.ruleForm.corrects=[];
+                this.ruleForm.corrects.push(val[val.length-1]);
             }
+        },
+        'ruleForm.subject_id':function(val){
+            this.getEducationSubject();
         },
     },
     

@@ -26,9 +26,11 @@
         <div class="manageBodyTitle">题库管理</div>
         <div class="manageBodyCon">
           <div class="manageBodyConBtn">
-            <el-button type="primary" size="mini" class="add" @click="reference_info=true">添加</el-button>
-            <el-button type="primary" size="mini" class="edit">修改</el-button>
-            <el-button type="primary" size="small" class="delete">删除</el-button>
+            <el-button type="primary" size="mini" class="add" @click="add">添加</el-button>
+            <!--
+            <el-button type="primary" size="mini" class="edit" @click="eidt">修改</el-button>
+            <el-button type="primary" size="small" class="delete" @click="remove">删除</el-button>
+            -->
           </div>
           <el-search-table-pagination  type="local"
               class="manageBodyConTable"
@@ -46,7 +48,7 @@
         </div>
       </div>
       <!-- 手工录入 -->
-      <v-reference :isDialog.sync="reference_info" v-if="reference_info"></v-reference>
+      <v-reference :isDialog.sync="reference_info" :data="subject_id" v-if="reference_info"></v-reference>
       <!-- 随机答题 -->
       <v-questions :isDialog.sync="questions_info" v-if="questions_info"></v-questions>
   </div>
@@ -65,9 +67,10 @@ export default {
   data() {
     return {
       reference_info:false,
+      subject_id:'',
       questions_info:false,
       table_data:[
-        {content:'xia'}
+        {subject_id:'1',content:'xia'}
       ],
       table_columns:[
         { prop: 'content', label: '题目内容',minWidth:10},
@@ -75,6 +78,7 @@ export default {
         { prop: 'label', label: '问题标签',minWidth:10},
         { prop: 'result', label: '正确答案',minWidth:10},
         { prop: 'errorRate', label: '错误率',minWidth:10},
+        { prop: 'handle', label: '操作',width:90,slotName:'preview-handle'},
       ],
     };
   },
@@ -87,6 +91,19 @@ export default {
     
   },
   methods: {
+    add(){
+      this.subject_id="";
+      this.reference_info=true;
+      console.log(this.reference_info)
+    },
+    edit(row){
+      console.log(row)
+      this.subject_id=row.subject_id;
+      this.reference_info=true;
+    },
+    remove(row){
+
+    },
     
   }
 };

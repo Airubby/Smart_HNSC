@@ -49,7 +49,7 @@ export default {
        this.centerDialogVisible=this.isDialog;
     },
     mounted() {
-        this.getLoginTitle();
+        this.randomSubject();
     },
     data() {
         return {
@@ -67,8 +67,8 @@ export default {
         }
     },
     methods:{
-        getLoginTitle(){
-            API.getLoginTitle({}).then(res=> {
+        randomSubject(){
+            API.randomSubject({}).then(res=> {
                 console.log(res)
                 if(res.code==200) {
                     this.dataList=res.data;
@@ -82,8 +82,8 @@ export default {
                 }
             })
         },
-        postLoginTitleAnswer(){
-            API.postLoginTitleAnswer({
+        submitExam(){
+            API.submitExam({
                 result:JSON.stringify(this.answerList)
             }).then(res=> {
                 console.log(res)
@@ -109,7 +109,7 @@ export default {
                 }
             }else{
                 if(this.finish==this.all){
-                    this.postLoginTitleAnswer();
+                    this.submitExam();
                     this.sureClose=true;
                     return;
                 }

@@ -12,17 +12,17 @@
                     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                         <div class="title"><i class="line"></i>随机答题<span>(建议不超过30题)</span></div>
                         <div class="conbox">
-                            <el-form-item label="题目数量设置" prop="number">
-                                <el-input v-model="ruleForm.number" type="number" size="small" style="width:100px;"></el-input>
+                            <el-form-item label="题目数量设置" prop="count">
+                                <el-input v-model="ruleForm.count" type="number" size="small" style="width:100px;"></el-input>
                             </el-form-item>
-                            <el-form-item label="单选" prop="radio">
-                                <el-input v-model="ruleForm.radio" type="number" size="small" style="width:100px;"></el-input>
+                            <el-form-item label="单选" prop="single">
+                                <el-input v-model="ruleForm.single" type="number" size="small" style="width:100px;"></el-input>
                             </el-form-item>
                             <el-form-item label="多选" prop="multiple">
                                 <el-input v-model="ruleForm.multiple" type="number" size="small" style="width:100px;"></el-input>
                             </el-form-item>
-                            <el-form-item label="判断" prop="decide">
-                                <el-input v-model="ruleForm.decide" type="number" size="small" style="width:100px;"></el-input>
+                            <el-form-item label="判断" prop="judgment">
+                                <el-input v-model="ruleForm.judgment" type="number" size="small" style="width:100px;"></el-input>
                             </el-form-item>
                         </div>
                     </el-form>
@@ -30,14 +30,15 @@
             </slot>
             <slot name="footer">
                 <div class="dialog-footer">
-                    <el-button type="primary">确定</el-button>
-                    <el-button type="primary">取消</el-button>
+                    <el-button type="primary" @click="saveParameter">确定</el-button>
+                    <el-button type="primary" @click="centerDialogVisible=false">取消</el-button>
                 </div>
             </slot>
         </div>
     </div>
 </template>
 <script>
+import * as API from '@/api/edu';
 export default {
     name: 'VQuestions',
     props:["isDialog","data"],
@@ -48,23 +49,40 @@ export default {
        this.centerDialogVisible=this.isDialog;
     },
     mounted() {
-        
+        this.getParameter();
     },
     data() {
         return {
             centerDialogVisible:false,
-            type_data:[{id:'1',name:'单选'},{id:'2',name:'多选'},{id:'3',name:'判断'}],
             ruleForm: {
-                number:'',
-                radio:'',
+                count:'',
+                single:'',
                 multiple:'',
-                decide:'',
+                judgment:'',
             },
             rules:{},
         }
     },
     methods:{
-       
+       getParameter:function(){
+            API.getEducationAnswerParameter({}).then(res=> {
+                if(res.code==200) {
+                    this.ruleForm=res.data;
+                }else{
+                    this.$message.warning(res.msg);
+                }
+            })
+        },
+        saveParameter:function(){
+            this.centerDialogVisible=false;
+            API.saveEducationAnswerParameter(this.ruleForm).then(res=> {
+                if(res.code==200) {
+                    this.$message.success(res.msg);
+                }else{
+                    this.$message.warning(res.msg);
+                }
+            })
+        },
     },
     watch:{
         centerDialogVisible(value){
