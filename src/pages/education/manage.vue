@@ -3,9 +3,9 @@
       <div class="manageTop">
         <el-row :gutter="17" class="manageTopElrow">
           <el-col :span="8" class="manageTopElcol">
-            <div class="manageTopBox eduReferenceBg" @click="reference_info=true">
+            <div class="manageTopBox eduReferenceBg">
               <svg-icon icon-class="diannao-copy-copy" class="manageTopimg"></svg-icon>
-              <h2>手工录入</h2>
+              <h2>EXCEL导入</h2>
             </div>
           </el-col>
           <el-col :span="8" class="manageTopElcol">
@@ -26,7 +26,7 @@
         <div class="manageBodyTitle">题库管理</div>
         <div class="manageBodyCon">
           <div class="manageBodyConBtn">
-            <el-button type="primary" size="mini" class="add">添加</el-button>
+            <el-button type="primary" size="mini" class="add" @click="reference_info=true">添加</el-button>
             <el-button type="primary" size="mini" class="edit">修改</el-button>
             <el-button type="primary" size="small" class="delete">删除</el-button>
           </div>

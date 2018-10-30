@@ -1,0 +1,48 @@
+GET /api/Education/SearchEducationSubject
+page_size:10
+page_index:1
+
+POST /api/Education/UpdateEducationSubject
+type:"单选题"
+analyze:"答案解析……"
+title:"采购人根据价格测算情况，可以在采购预算额度内合理设定(?)。"
+corrects:"C"
+a:"最低限价"
+b:"平均价"
+c:"最高限价"
+d:"最高限价和最低限价"
+
+GET /api/Education/GetEducationSubjectByID
+subject_id:"eacccb15-bc9b-4d92-91c0-6ab416b283ba"
+
+GET /api/Education/GetEducationAnswerParameter
+
+POST /api/Education/SaveEducationAnswerParameter
+count:15
+single:5
+multiple:5
+judgment:5
+
+GET /api/Education/RandomSearchEducationSubject
+
+POST /api/Education/SubmitExam
+[
+  {
+    "subject_id": "eacccb15-bc9b-4d92-91c0-6ab416b283ba",
+    "selected": "C",
+    "outcome": true
+  },
+ {
+    "subject_id": "511d9b0c-2ce2-47bf-a12d-de7832c84cd7",
+    "selected": "D",
+    "outcome": false
+  }
+]
+
+GET /api/Education/GetExamNumberByUserID
+GET /api/Education/GetExamCountByUserID
+GET /api/Education/GetExamRightRateByUserID
+
+GET /api/Education/SearchWrongExamByUserID
+page_size:10
+page_index:1

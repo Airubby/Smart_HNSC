@@ -1,0 +1,8 @@
+1.第三方获取auth_code
+http://182.150.31.84:20018/pcLogin.html?appId=SA1P749TMN4XX7&redirectUrl=http://172.22.11.58
+账号：18908061520   密码：123456 通过返回的url后缀，得到参数auth_code的值
+2.系统登录
+http://zjjg.kojyoui.cn/Swagger/ui/index
+接口 /api/SSO/CALogin  录入auth_code，返回Token
+3.获取用户信息
+接口 /api/SSO/GetUser  录入Token，返回用户信息

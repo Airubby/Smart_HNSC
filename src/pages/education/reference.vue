@@ -32,12 +32,13 @@
                                     </el-option>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item label="题目类别" prop="result">
+                            <el-form-item label="正确答案" prop="result">
                                 <el-checkbox-group v-model="ruleForm.result">
-                                    <el-checkbox label="答案A" value="A"></el-checkbox>
-                                    <el-checkbox label="答案B" value="B"></el-checkbox>
-                                    <el-checkbox label="答案C" value="C"></el-checkbox>
-                                    <el-checkbox label="答案D" value="D"></el-checkbox>
+                                    <p><el-checkbox label="A" value="A" key="A">答案A</el-checkbox></p>
+                                    <p><el-checkbox label="B" value="B" key="B">答案B</el-checkbox></p>
+                                    <p v-if="ruleForm.type!='3'"><el-checkbox label="C" value="C" key="C">答案C</el-checkbox></p>
+                                    <p v-if="ruleForm.type!='3'"><el-checkbox label="D" value="D" key="D">答案D</el-checkbox></p>
+                                     
                                 </el-checkbox-group>
                             </el-form-item>
                             <el-form-item label="题目解析" prop="analysis">
@@ -58,12 +59,14 @@
                             <el-form-item label="B" prop="B">
                                 <el-input v-model="ruleForm.B" placeholder="请输入文字" size="small"></el-input>
                             </el-form-item>
+                            <div v-if="ruleForm.type!='3'">
                             <el-form-item label="C" prop="C">
                                 <el-input v-model="ruleForm.C" placeholder="请输入文字" size="small"></el-input>
                             </el-form-item>
                             <el-form-item label="D" prop="D">
                                 <el-input v-model="ruleForm.D" placeholder="请输入文字" size="small"></el-input>
                             </el-form-item>
+                            </div>
                         </div>
                     </el-form>
                </div>
@@ -94,6 +97,8 @@ export default {
         return {
             centerDialogVisible:false,
             type_data:[{id:'1',name:'单选'},{id:'2',name:'多选'},{id:'3',name:'判断'}],
+            // <p v-for="inItem in result_data"><el-checkbox :label="inItem.id" :value="inItem.id" :key="inItem.id">{{inItem.item}}</el-checkbox></p>   
+            // result_data:[{id:'A',item:'答案A'},{id:'B',item:'答案B'},{id:'C',item:'答案C'},{id:'D',item:'答案D'}],
             ruleForm: {
                 type: '',
                 category:'',
@@ -106,7 +111,30 @@ export default {
                 C:'',
                 D:'',
             },
-            rules:{},
+            rules:{
+                type: [
+                    { required: true, message: '请选择题目类型', trigger: 'change' },
+                ],
+                result: [
+                    { required: true, message: '请选择题目答案', trigger: 'change' },
+                ],
+                content: [
+                    { required: true, message: '请输入题目内容', trigger: 'blur' },
+                ],
+                A: [
+                    { required: true, message: '请输入A答案内容', trigger: 'blur' },
+                ],
+                B: [
+                    { required: true, message: '请输入B答案内容', trigger: 'blur' },
+                ],
+                C: [
+                    { required: true, message: '请输入C答案内容', trigger: 'blur' },
+                ],
+                D: [
+                    { required: true, message: '请输入D答案内容', trigger: 'blur' },
+                ],
+
+            },
         }
     },
     methods:{
@@ -115,7 +143,13 @@ export default {
     watch:{
         centerDialogVisible(value){
             this.$emit('update:isDialog', value)
-        }
+        },
+        'ruleForm.result':function(val){
+            if(this.ruleForm.type!='2'&&val.length>1){
+                this.ruleForm.result=[];
+                this.ruleForm.result.push(val[val.length-1]);
+            }
+        },
     },
     
 }
