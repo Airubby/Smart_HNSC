@@ -8,7 +8,7 @@ import $AjaxUrl from './severurl'
 const service = axios.create({
   // baseURL: 'http://www.javasoft.top:9090/service',
   baseURL: process.env.NODE_ENV == 'production' ?
-  'http://www.javasoft.top:9090/service' : $AjaxUrl,
+  'http://zjjg.kojyoui.cn' : $AjaxUrl,
   timeout: 5000 // 请求超时时间
 });
 
@@ -20,6 +20,7 @@ service.interceptors.request.use(
     if (_token) {
       config.headers["token"] = _token;
     }
+    config.headers["token"] ="88888888"
     return config;
   },
   error => {

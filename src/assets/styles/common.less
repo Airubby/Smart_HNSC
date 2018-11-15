@@ -209,3 +209,24 @@
   bottom: 0;
   content: "";
 }
+//显示正确答案的checkbox
+.el-checkbox__input.is-disabled.is-checked+span.el-checkbox__label{
+  color:#599EF0;
+}
+.el-checkbox__input.is-disabled.is-checked .el-checkbox__inner{
+  background-color: #599EF0 !important;
+  border-color: #599EF0 !important;
+}
+.acheck .is-checked .el-checkbox__inner,
+.acheck .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner{
+  background-color: #F28636 !important;
+  border-color: #F28636 !important;
+}
+.acheck .is-checked+.el-checkbox__label,
+.acheck .el-checkbox__input.is-disabled+span.el-checkbox__label{
+  color:#F28636;
+}
+//table
+.el-table .cell{
+  white-space: nowrap !important;
+}

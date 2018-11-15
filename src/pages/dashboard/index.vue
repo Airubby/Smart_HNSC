@@ -447,9 +447,12 @@ export default {
     this.tableTitle = this.tmplData[1].title
   },
   methods: {
+    //获取弹窗答题状态
     getEducationStatus(){
       eduAPI.getEducationStatus({}).then(res=> {
-        if(res.data) {
+        console.log(res)
+        if(res.code==200) {
+          this.answer=res.data;
           this.answer=true;
         }
       })

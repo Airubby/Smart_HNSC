@@ -29,6 +29,9 @@ Vue.use(ElSearchTablePagination)
 import tool from '@/utils/tool'
 Vue.prototype.$tool = tool
 
+import uploadUrl from '@/utils/uploadUrl'
+Vue.prototype.$uploadPath = uploadUrl
+
 
 Vue.config.productionTip = false
 

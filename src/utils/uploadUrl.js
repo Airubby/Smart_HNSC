@@ -8,5 +8,5 @@
 import $AjaxUrl from './severurl'
 
 const $uploadPath = process.env.NODE_ENV == 'production' ?
-  'http://218.246.5.8/Psms' : $AjaxUrl
+  'http://zjjg.kojyoui.cn' : $AjaxUrl
 export default $uploadPath

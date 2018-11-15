@@ -44,10 +44,21 @@ function translateTime(value) {
 
 }
 
+//判断数组包含某个元素
+function arrayContains(v,arr){
+  if(arr.indexOf(v)==-1){
+    return false;
+  }else{
+    return true;
+  }
+}
+
+
 var tool = {
   formatDate: formatDate,
   formatTime: formatTime,
-  translateTime: translateTime
+  translateTime: translateTime,
+  arrayContains:arrayContains
 }
 
 export default tool
